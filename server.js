@@ -70,3 +70,7 @@ server.listen(3000, function() {
   //callback function to let us know when the server has started listening
   console.log("Server listening on port 3000.");
 });
+
+// load our chat server that we wrote
+var chatServer = require('./lib/chat_server');
+chatServer.listen(server);
