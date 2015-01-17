@@ -49,3 +49,24 @@ function serveStatic(response, cache, absPath) {
     });
   }
 }
+
+// create the actual server
+var server = http.createServer(function(request, response) {
+  var filePath = false;
+
+  if(request.url == '/') {
+    //give a default response (!routing!)
+    filePath = 'public/index.html';
+  } else {
+    //translate other paths
+    filePath = 'public' + request.url;
+  }
+  var absPath = './' + filePath;
+  // we give the constructed file path to absPath so that other methods can use it
+  serveStatic(response, cache, absPath);
+});
+
+server.listen(3000, function() {
+  //callback function to let us know when the server has started listening
+  console.log("Server listening on port 3000.");
+});
